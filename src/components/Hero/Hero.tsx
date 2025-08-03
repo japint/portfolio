@@ -6,7 +6,7 @@ const Hero: React.FC = () => {
   const handleDownloadCV = () => {
     // Direct download from public/cv folder
     const link = document.createElement("a");
-    link.href = "/cv/angelo-centeno-cv.pdf";
+    link.href = "/cv/CV_Angelo_Centeno.pdf";
     link.download = "Angelo_Centeno_CV.pdf";
     document.body.appendChild(link);
     link.click();
