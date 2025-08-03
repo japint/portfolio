@@ -119,59 +119,65 @@ const Timeline: React.FC = () => {
 
       {/* Compact Accordion Timeline */}
       <div className="max-w-4xl mx-auto space-y-3">
-        {timelineData.map((event, index) => {
-          const isExpanded = expandedItems.has(index);
-          return (
-            <div
-              key={index}
-              className="card hover:shadow-lg transition-all duration-200"
-            >
-              {/* Header - Always Visible */}
+        {timelineData && timelineData.length > 0 ? (
+          timelineData.map((event, index) => {
+            const isExpanded = expandedItems.has(index);
+            return (
               <div
-                className="flex items-center justify-between cursor-pointer p-4"
-                onClick={() => toggleExpanded(index)}
+                key={index}
+                className="card hover:shadow-lg transition-all duration-200"
               >
-                <div className="flex items-center space-x-4 flex-1">
-                  <div
-                    className={`w-3 h-8 bg-gradient-to-b ${getCategoryColor(
-                      event.category
-                    )} rounded-full`}
-                  ></div>
-                  <div className="flex-1">
-                    <div className="flex items-center space-x-2 mb-1">
-                      <AiOutlineCalendar className="text-secondary w-4 h-4" />
-                      <span className="text-sm font-bold text-secondary">
-                        {event.year}
-                      </span>
+                {/* Header - Always Visible */}
+                <div
+                  className="flex items-center justify-between cursor-pointer p-4"
+                  onClick={() => toggleExpanded(index)}
+                >
+                  <div className="flex items-center space-x-4 flex-1">
+                    <div
+                      className={`w-3 h-8 bg-gradient-to-b ${getCategoryColor(
+                        event.category
+                      )} rounded-full`}
+                    ></div>
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-2 mb-1">
+                        <AiOutlineCalendar className="text-secondary w-4 h-4" />
+                        <span className="text-sm font-bold text-secondary">
+                          {event.year}
+                        </span>
+                      </div>
+                      <h3 className="text-lg font-bold text-white">
+                        {event.title}
+                      </h3>
+                      <p className="text-secondary text-sm font-medium">
+                        {event.company}
+                      </p>
                     </div>
-                    <h3 className="text-lg font-bold text-white">
-                      {event.title}
-                    </h3>
-                    <p className="text-secondary text-sm font-medium">
-                      {event.company}
-                    </p>
+                  </div>
+                  <div className="text-secondary">
+                    {isExpanded ? (
+                      <AiOutlineDown className="w-5 h-5" />
+                    ) : (
+                      <AiOutlineRight className="w-5 h-5" />
+                    )}
                   </div>
                 </div>
-                <div className="text-secondary">
-                  {isExpanded ? (
-                    <AiOutlineDown className="w-5 h-5" />
-                  ) : (
-                    <AiOutlineRight className="w-5 h-5" />
-                  )}
-                </div>
-              </div>
 
-              {/* Expandable Content */}
-              {isExpanded && (
-                <div className="px-4 pb-4 pt-0 border-t border-white/10 mt-2">
-                  <p className="text-gray-300 leading-relaxed text-sm mt-3">
-                    {event.text}
-                  </p>
-                </div>
-              )}
-            </div>
-          );
-        })}
+                {/* Expandable Content */}
+                {isExpanded && (
+                  <div className="px-4 pb-4 pt-0 border-t border-white/10 mt-2">
+                    <p className="text-gray-300 leading-relaxed text-sm mt-3">
+                      {event.text}
+                    </p>
+                  </div>
+                )}
+              </div>
+            );
+          })
+        ) : (
+          <div className="text-center text-gray-300">
+            <p>Timeline data not available</p>
+          </div>
+        )}
       </div>
 
       {/* Compact Call to Action */}
