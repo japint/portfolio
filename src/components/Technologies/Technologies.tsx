@@ -89,37 +89,49 @@ const Technologies: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {techCategories.map((category, index) => (
-          <div key={index} className="card group">
-            <div className="flex items-center justify-center mb-6 text-secondary group-hover:scale-110 transition-transform duration-300">
-              {category.icon}
-            </div>
+        {techCategories && techCategories.length > 0 ? (
+          techCategories.map((category, index) => (
+            <div key={index} className="card group">
+              <div className="flex items-center justify-center mb-6 text-secondary group-hover:scale-110 transition-transform duration-300">
+                {category.icon}
+              </div>
 
-            <h3 className="text-2xl font-bold text-white mb-4 text-center">
-              {category.title}
-            </h3>
+              <h3 className="text-2xl font-bold text-white mb-4 text-center">
+                {category.title}
+              </h3>
 
-            <p className="text-gray-300 text-center mb-6 leading-relaxed">
-              {category.description}
-            </p>
+              <p className="text-gray-300 text-center mb-6 leading-relaxed">
+                {category.description}
+              </p>
 
-            <div className="grid grid-cols-2 gap-3">
-              {category.technologies.map((tech, techIndex) => (
-                <div
-                  key={techIndex}
-                  className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-colors duration-200 group/tech"
-                >
-                  <div className="text-secondary group-hover/tech:text-white transition-colors duration-200">
-                    {tech.icon}
+              <div className="grid grid-cols-2 gap-3">
+                {category.technologies && category.technologies.length > 0 ? (
+                  category.technologies.map((tech, techIndex) => (
+                    <div
+                      key={techIndex}
+                      className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-colors duration-200 group/tech"
+                    >
+                      <div className="text-secondary group-hover/tech:text-white transition-colors duration-200">
+                        {tech.icon}
+                      </div>
+                      <span className="text-gray-300 font-medium text-sm">
+                        {tech.name}
+                      </span>
+                    </div>
+                  ))
+                ) : (
+                  <div className="col-span-2 text-center text-gray-300 text-sm">
+                    <p>No technologies listed</p>
                   </div>
-                  <span className="text-gray-300 font-medium text-sm">
-                    {tech.name}
-                  </span>
-                </div>
-              ))}
+                )}
+              </div>
             </div>
+          ))
+        ) : (
+          <div className="col-span-full text-center text-gray-300">
+            <p>Loading technologies...</p>
           </div>
-        ))}
+        )}
       </div>
 
       {/* Skills Progress Section */}
