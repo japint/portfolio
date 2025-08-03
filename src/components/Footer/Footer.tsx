@@ -37,9 +37,17 @@ const Footer: React.FC = () => {
   const navLinks = [
     { href: "#about", label: "About" },
     { href: "#projects", label: "Projects" },
-    { href: "#tech", label: "Technologies" },
-    { href: "#contact", label: "Contact" },
+    { href: "#tech", label: "Tech Stack" },
+    { href: "#timeline", label: "Journey" },
+    { href: "#accomplishments", label: "Achievements" },
   ];
+
+  const scrollToSection = (href: string) => {
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <footer className="bg-primary/90 border-t border-white/10 mt-20">
@@ -65,12 +73,12 @@ const Footer: React.FC = () => {
             <ul className="space-y-2">
               {navLinks.map((link) => (
                 <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className="text-gray-300 hover:text-secondary transition-colors duration-200"
+                  <button
+                    onClick={() => scrollToSection(link.href)}
+                    className="text-gray-300 hover:text-secondary transition-colors duration-200 text-left"
                   >
                     {link.label}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
