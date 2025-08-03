@@ -108,7 +108,7 @@ const Timeline: React.FC = () => {
   };
 
   return (
-    <section className="section-container">
+    <section id="timeline" className="section-container">
       <div className="text-center mb-12">
         <h2 className="section-title">My Journey</h2>
         <p className="section-subtitle mx-auto max-w-2xl">

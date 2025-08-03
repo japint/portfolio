@@ -55,7 +55,7 @@ const data: AccomplishmentData[] = [
 
 const Accomplishments: React.FC = () => {
   return (
-    <section className="section-container">
+    <section id="accomplishments" className="section-container">
       <div className="text-center mb-16">
         <h2 className="section-title">Personal Achievements</h2>
       </div>
