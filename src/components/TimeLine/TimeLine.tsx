@@ -208,6 +208,9 @@ const Timeline: React.FC = () => {
           transformation, international adaptation, and continuous learning
           across three countries and two decades.
         </p>
+        <p className="text-gray-400 text-sm mt-4 opacity-75">
+          Hover over phases to explore detailed milestones and achievements
+        </p>
       </div>
 
       {/* Journey Phases */}
@@ -225,7 +228,7 @@ const Timeline: React.FC = () => {
 
                 {/* Phase Card */}
                 <div
-                  className={`card p-6 cursor-pointer transition-all duration-300 hover:scale-105 ${
+                  className={`card p-6 cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-lg group ${
                     activePhase === phase.id
                       ? "ring-2 ring-secondary shadow-xl"
                       : ""
@@ -235,7 +238,7 @@ const Timeline: React.FC = () => {
                   <div
                     className={`inline-flex items-center justify-center w-12 h-12 rounded-full ${getCategoryBg(
                       phase.category
-                    )} mb-4`}
+                    )} mb-4 group-hover:scale-110 transition-transform duration-200`}
                   >
                     <div
                       className={`text-white bg-gradient-to-br ${getCategoryColor(
@@ -246,18 +249,23 @@ const Timeline: React.FC = () => {
                     </div>
                   </div>
 
-                  <h3 className="text-lg font-bold text-white mb-2">
+                  <h3 className="text-lg font-bold text-white mb-2 group-hover:text-secondary transition-colors duration-200">
                     {phase.title}
                   </h3>
                   <p className="text-sm font-medium text-secondary mb-2">
                     {phase.period}
                   </p>
-                  <p className="text-xs text-gray-300 mb-3">
+                  <p className="text-xs text-gray-300 mb-3 group-hover:text-gray-200 transition-colors duration-200">
                     {phase.description}
                   </p>
-                  <div className="flex items-center text-xs text-gray-400">
-                    <AiOutlineGlobal className="w-3 h-3 mr-1" />
-                    {phase.location}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center text-xs text-gray-400">
+                      <AiOutlineGlobal className="w-3 h-3 mr-1" />
+                      {phase.location}
+                    </div>
+                    <div className="text-gray-500 text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                      hover to explore
+                    </div>
                   </div>
                 </div>
               </div>
@@ -294,20 +302,36 @@ const Timeline: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Phase Content */}
-                <div className="card flex-1 p-4">
-                  <h3 className="text-lg font-bold text-white mb-1">
+                {/* Phase Content - Now Interactive */}
+                <div
+                  className={`card flex-1 p-4 cursor-pointer transition-all duration-300 hover:shadow-lg group ${
+                    activePhase === phase.id
+                      ? "ring-2 ring-secondary shadow-xl"
+                      : ""
+                  }`}
+                  onClick={() =>
+                    setActivePhase(activePhase === phase.id ? null : phase.id)
+                  }
+                >
+                  <h3 className="text-lg font-bold text-white mb-1 group-hover:text-secondary transition-colors duration-200">
                     {phase.title}
                   </h3>
                   <p className="text-sm font-medium text-secondary mb-2">
                     {phase.period}
                   </p>
-                  <p className="text-sm text-gray-300 mb-3">
+                  <p className="text-sm text-gray-300 mb-3 group-hover:text-gray-200 transition-colors duration-200">
                     {phase.description}
                   </p>
-                  <div className="flex items-center text-xs text-gray-400">
-                    <AiOutlineGlobal className="w-3 h-3 mr-1" />
-                    {phase.location}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center text-xs text-gray-400">
+                      <AiOutlineGlobal className="w-3 h-3 mr-1" />
+                      {phase.location}
+                    </div>
+                    <div className="text-gray-500 text-xs opacity-50 group-hover:opacity-100 transition-opacity duration-200">
+                      {activePhase === phase.id
+                        ? "tap to close"
+                        : "tap to explore"}
+                    </div>
                   </div>
                 </div>
               </div>
