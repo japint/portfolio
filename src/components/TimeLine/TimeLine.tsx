@@ -7,6 +7,8 @@ import {
   AiOutlineCode,
   AiOutlineBook,
 } from "react-icons/ai";
+import Modal from "../Modal/Modal";
+import TimelineModalContent from "../Modal/TimelineModalContent";
 
 interface TimelinePhase {
   id: string;
@@ -164,6 +166,23 @@ const journeyPhases: TimelinePhase[] = [
 
 const Timeline: React.FC = () => {
   const [activePhase, setActivePhase] = useState<string | null>("development");
+  const [modalPhase, setModalPhase] = useState<TimelinePhase | null>(null);
+
+  const openModal = (phase: TimelinePhase) => {
+    setModalPhase(phase);
+  };
+
+  const closeModal = () => {
+    setModalPhase(null);
+  };
+
+  const handlePhaseClick = (phase: TimelinePhase) => {
+    // Only open modal on mobile/tablet, use hover detail on desktop
+    const isMobile = window.innerWidth < 1024; // lg breakpoint
+    if (isMobile) {
+      openModal(phase);
+    }
+  };
 
   const getCategoryColor = (category: string) => {
     switch (category) {
@@ -209,7 +228,12 @@ const Timeline: React.FC = () => {
           across three countries and two decades.
         </p>
         <p className="text-gray-400 text-sm mt-4 opacity-75">
-          Hover over phases to explore detailed milestones and achievements
+          <span className="hidden lg:inline">
+            Hover over phases to explore detailed milestones and achievements
+          </span>
+          <span className="lg:hidden">
+            Tap on phases to explore detailed milestones and achievements
+          </span>
         </p>
       </div>
 
@@ -309,9 +333,7 @@ const Timeline: React.FC = () => {
                       ? "ring-2 ring-secondary shadow-xl"
                       : ""
                   }`}
-                  onClick={() =>
-                    setActivePhase(activePhase === phase.id ? null : phase.id)
-                  }
+                  onClick={() => handlePhaseClick(phase)}
                 >
                   <h3 className="text-lg font-bold text-white mb-1 group-hover:text-secondary transition-colors duration-200">
                     {phase.title}
@@ -328,9 +350,7 @@ const Timeline: React.FC = () => {
                       {phase.location}
                     </div>
                     <div className="text-gray-500 text-xs opacity-50 group-hover:opacity-100 transition-opacity duration-200">
-                      {activePhase === phase.id
-                        ? "tap to close"
-                        : "tap to explore"}
+                      tap for details
                     </div>
                   </div>
                 </div>
@@ -339,9 +359,9 @@ const Timeline: React.FC = () => {
           ))}
         </div>
 
-        {/* Detailed View */}
+        {/* Desktop Detailed View - Hidden on Mobile */}
         {activePhase && (
-          <div className="mt-16">
+          <div className="mt-16 hidden lg:block">
             <div className="card p-8">
               {(() => {
                 const phase = journeyPhases.find((p) => p.id === activePhase);
@@ -418,6 +438,15 @@ const Timeline: React.FC = () => {
             </div>
           </div>
         )}
+
+        {/* Mobile Timeline Modal - Only on Mobile */}
+        <Modal
+          isOpen={!!modalPhase}
+          onClose={closeModal}
+          title={modalPhase?.title}
+        >
+          {modalPhase && <TimelineModalContent phase={modalPhase} />}
+        </Modal>
 
         {/* Future Goals */}
         <div className="mt-16 text-center">
