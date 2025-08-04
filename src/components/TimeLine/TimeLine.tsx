@@ -1,196 +1,430 @@
 import React, { useState } from "react";
 import {
   AiOutlineCalendar,
-  AiOutlineDown,
-  AiOutlineRight,
+  AiOutlineGlobal,
+  AiOutlineUser,
+  AiOutlineTrophy,
+  AiOutlineCode,
+  AiOutlineBook,
 } from "react-icons/ai";
 
-interface TimelineEvent {
-  year: string;
+interface TimelinePhase {
+  id: string;
   title: string;
-  company: string;
-  text: string;
-  category: "development" | "transition" | "career" | "education";
+  period: string;
+  description: string;
+  location: string;
+  category:
+    | "education"
+    | "career"
+    | "transition"
+    | "development"
+    | "achievement";
+  icon: React.ReactNode;
+  milestones: {
+    year: string;
+    title: string;
+    company: string;
+    achievement: string;
+    skills?: string[];
+  }[];
 }
 
-const timelineData: TimelineEvent[] = [
+const journeyPhases: TimelinePhase[] = [
   {
-    year: "MAR-JUN 2025",
-    title: "Full-Stack Web Development",
-    company: "REDI School of Digital Integration",
-    category: "development",
-    text: "Completed comprehensive full-stack program covering PERN stack development. Built and presented a Pinterest Clone using PostgreSQL, Express, React, and Node.js during REDI Demo Day.",
-  },
-  {
-    year: "SEP 2024-JAN 2025",
-    title: "React Course",
-    company: "Advanced Frontend Development",
-    category: "development",
-    text: "Mastered React ecosystem including hooks, state management, component architecture, and modern development patterns.",
-  },
-  {
-    year: "MAR-JUN 2024",
-    title: "JavaScript Essentials",
-    company: "Foundational Programming",
-    category: "development",
-    text: "Completed comprehensive JavaScript training covering ES6+, DOM manipulation, asynchronous programming, and modern JavaScript patterns.",
-  },
-  {
-    year: "2023-PRESENT",
-    title: "German Language Training",
-    company: "Sankt Augustin, NRW, Germany",
-    category: "transition",
-    text: "Completed B1+ German language certification (2023). Currently pursuing B2 German course to enhance professional integration.",
-  },
-  {
-    year: "JAN 2023",
-    title: "Relocation to Germany",
-    company: "Career Transition",
-    category: "transition",
-    text: "Relocated from the Philippines to Sankt Augustin, Germany. Began comprehensive career transition from project management to software development.",
-  },
-  {
-    year: "2017-2022",
-    title: "Project Manager",
-    company: "AEC Water Tech, Philippines",
-    category: "career",
-    text: "Led water and wastewater projects from planning to execution, ensuring efficient, cost-effective delivery. Oversaw engineering teams and site operations.",
-  },
-  {
-    year: "2013-2017",
-    title: "Project in Charge",
-    company: "Alpine Systems Corporation, Ph",
-    category: "career",
-    text: "Drafted wastewater treatment plant layouts and piping systems. Promoted from technical role to Project In-Charge, overseeing site execution.",
-  },
-  {
-    year: "2009-2013",
-    title: "AutoCAD Operator",
-    company: "MSQP, Saudi Arabia",
-    category: "career",
-    text: "Prepared HVAC duct designs per SMACNA/ISO standards for projects across KSA and GCC region.",
-  },
-  {
-    year: "2005-2009",
-    title: "Bachelor of Science in Information Technology",
-    company: "AMA Computer College, Philippines",
+    id: "foundation",
+    title: "Foundation Era",
+    period: "2005-2017",
+    description: "Building technical expertise and engineering mindset",
+    location: "Philippines & Saudi Arabia",
     category: "education",
-    text: "Completed BSIT degree with hands-on experience in software development, networking, and IT systems.",
+    icon: <AiOutlineBook className="w-6 h-6" />,
+    milestones: [
+      {
+        year: "2005-2009",
+        title: "Bachelor of Science in Information Technology",
+        company: "AMA Computer College, Philippines",
+        achievement: "BSIT degree with software development foundation",
+        skills: ["Programming", "Networking", "IT Systems"],
+      },
+      {
+        year: "2009-2013",
+        title: "AutoCAD Operator",
+        company: "MSQP, Saudi Arabia",
+        achievement: "HVAC design expertise across KSA and GCC region",
+        skills: ["AutoCAD", "HVAC Design", "SMACNA Standards"],
+      },
+      {
+        year: "2013-2017",
+        title: "Project In-Charge",
+        company: "Alpine Systems Corporation, Philippines",
+        achievement:
+          "Promoted to leadership role in wastewater treatment projects",
+        skills: ["Project Management", "Technical Drawing", "Team Leadership"],
+      },
+    ],
+  },
+  {
+    id: "growth",
+    title: "Growth & Leadership",
+    period: "2017-2022",
+    description: "Advancing to project management and technical leadership",
+    location: "Philippines",
+    category: "career",
+    icon: <AiOutlineUser className="w-6 h-6" />,
+    milestones: [
+      {
+        year: "2017-2022",
+        title: "Project Manager",
+        company: "AEC Water Tech, Philippines",
+        achievement:
+          "Led water and wastewater projects from planning to execution",
+        skills: [
+          "Project Management",
+          "Team Leadership",
+          "Cost Control",
+          "Site Operations",
+        ],
+      },
+    ],
+  },
+  {
+    id: "transformation",
+    title: "Transformation Journey",
+    period: "2022-2023",
+    description: "International relocation and career pivot preparation",
+    location: "Germany",
+    category: "transition",
+    icon: <AiOutlineGlobal className="w-6 h-6" />,
+    milestones: [
+      {
+        year: "JAN 2023",
+        title: "Relocation to Germany",
+        company: "Career Transition",
+        achievement:
+          "Successfully relocated from Philippines to Sankt Augustin, Germany",
+        skills: ["Cultural Adaptation", "Language Learning"],
+      },
+      {
+        year: "2023-PRESENT",
+        title: "German Language Training",
+        company: "Sankt Augustin, NRW, Germany",
+        achievement: "Completed B1+ certification, currently pursuing B2 level",
+        skills: ["German Language (B2)", "Cultural Integration"],
+      },
+    ],
+  },
+  {
+    id: "development",
+    title: "Developer Evolution",
+    period: "2024-2025",
+    description: "Mastering modern web development and full-stack technologies",
+    location: "Germany",
+    category: "development",
+    icon: <AiOutlineCode className="w-6 h-6" />,
+    milestones: [
+      {
+        year: "MAR-JUN 2024",
+        title: "JavaScript Essentials",
+        company: "Foundational Programming",
+        achievement:
+          "Mastered ES6+, DOM manipulation, and asynchronous programming",
+        skills: ["JavaScript ES6+", "DOM Manipulation", "Async Programming"],
+      },
+      {
+        year: "SEP 2024-JAN 2025",
+        title: "React Mastery",
+        company: "Advanced Frontend Development",
+        achievement: "Mastered React ecosystem and modern development patterns",
+        skills: [
+          "React",
+          "Hooks",
+          "State Management",
+          "Component Architecture",
+        ],
+      },
+      {
+        year: "MAR-JUN 2025",
+        title: "Full-Stack Web Development",
+        company: "REDI School of Digital Integration",
+        achievement:
+          "Completed comprehensive PERN stack program with Pinterest Clone project",
+        skills: [
+          "PostgreSQL",
+          "Express",
+          "React",
+          "Node.js",
+          "Prisma",
+          "PERN Stack",
+        ],
+      },
+    ],
   },
 ];
 
 const Timeline: React.FC = () => {
-  const [expandedItems, setExpandedItems] = useState<Set<number>>(new Set([0])); // First item expanded by default
-
-  const toggleExpanded = (index: number) => {
-    const newExpanded = new Set(expandedItems);
-    if (newExpanded.has(index)) {
-      newExpanded.delete(index);
-    } else {
-      newExpanded.add(index);
-    }
-    setExpandedItems(newExpanded);
-  };
+  const [activePhase, setActivePhase] = useState<string | null>("development");
 
   const getCategoryColor = (category: string) => {
     switch (category) {
-      case "development":
-        return "from-blue-500 to-cyan-500";
-      case "transition":
-        return "from-purple-500 to-pink-500";
-      case "career":
-        return "from-green-500 to-emerald-500";
       case "education":
         return "from-orange-500 to-yellow-500";
+      case "career":
+        return "from-green-500 to-emerald-500";
+      case "transition":
+        return "from-purple-500 to-pink-500";
+      case "development":
+        return "from-blue-500 to-cyan-500";
+      case "achievement":
+        return "from-amber-500 to-orange-500";
       default:
         return "from-secondary to-white";
     }
   };
 
+  const getCategoryBg = (category: string) => {
+    switch (category) {
+      case "education":
+        return "bg-orange-500/20";
+      case "career":
+        return "bg-green-500/20";
+      case "transition":
+        return "bg-purple-500/20";
+      case "development":
+        return "bg-blue-500/20";
+      case "achievement":
+        return "bg-amber-500/20";
+      default:
+        return "bg-secondary/20";
+    }
+  };
+
   return (
     <section id="timeline" className="section-container">
-      <div className="text-center mb-12">
+      <div className="text-center mb-16">
         <h2 className="section-title">My Journey</h2>
-        <p className="section-subtitle mx-auto max-w-2xl">
-          From engineering and project management to software development— a
-          timeline of transformation, growth, and international adaptation.
+        <p className="section-subtitle mx-auto max-w-3xl">
+          From engineering foundations to full-stack development — a story of
+          transformation, international adaptation, and continuous learning
+          across three countries and two decades.
         </p>
       </div>
 
-      {/* Compact Accordion Timeline */}
-      <div className="max-w-4xl mx-auto space-y-3">
-        {timelineData && timelineData.length > 0 ? (
-          timelineData.map((event, index) => {
-            const isExpanded = expandedItems.has(index);
-            return (
-              <div
-                key={index}
-                className="card hover:shadow-lg transition-all duration-200"
-              >
-                {/* Header - Always Visible */}
+      {/* Journey Phases */}
+      <div className="max-w-6xl mx-auto">
+        {/* Desktop Timeline */}
+        <div className="hidden lg:block relative">
+          {/* Timeline Line */}
+          <div className="absolute top-32 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 via-green-500 to-blue-500 rounded-full"></div>
+
+          <div className="grid grid-cols-4 gap-8">
+            {journeyPhases.map((phase, index) => (
+              <div key={phase.id} className="relative">
+                {/* Phase Marker */}
+                <div className="absolute top-28 left-1/2 transform -translate-x-1/2 w-8 h-8 bg-primary border-4 border-white rounded-full shadow-lg z-10"></div>
+
+                {/* Phase Card */}
                 <div
-                  className="flex items-center justify-between cursor-pointer p-4"
-                  onClick={() => toggleExpanded(index)}
+                  className={`card p-6 cursor-pointer transition-all duration-300 hover:scale-105 ${
+                    activePhase === phase.id
+                      ? "ring-2 ring-secondary shadow-xl"
+                      : ""
+                  }`}
+                  onMouseEnter={() => setActivePhase(phase.id)}
                 >
-                  <div className="flex items-center space-x-4 flex-1">
+                  <div
+                    className={`inline-flex items-center justify-center w-12 h-12 rounded-full ${getCategoryBg(
+                      phase.category
+                    )} mb-4`}
+                  >
                     <div
-                      className={`w-3 h-8 bg-gradient-to-b ${getCategoryColor(
-                        event.category
-                      )} rounded-full`}
-                    ></div>
-                    <div className="flex-1">
-                      <div className="flex items-center space-x-2 mb-1">
-                        <AiOutlineCalendar className="text-secondary w-4 h-4" />
-                        <span className="text-sm font-bold text-secondary">
-                          {event.year}
-                        </span>
-                      </div>
-                      <h3 className="text-lg font-bold text-white">
-                        {event.title}
-                      </h3>
-                      <p className="text-secondary text-sm font-medium">
-                        {event.company}
-                      </p>
+                      className={`text-white bg-gradient-to-br ${getCategoryColor(
+                        phase.category
+                      )} rounded-full p-2`}
+                    >
+                      {phase.icon}
                     </div>
                   </div>
-                  <div className="text-secondary">
-                    {isExpanded ? (
-                      <AiOutlineDown className="w-5 h-5" />
-                    ) : (
-                      <AiOutlineRight className="w-5 h-5" />
-                    )}
+
+                  <h3 className="text-lg font-bold text-white mb-2">
+                    {phase.title}
+                  </h3>
+                  <p className="text-sm font-medium text-secondary mb-2">
+                    {phase.period}
+                  </p>
+                  <p className="text-xs text-gray-300 mb-3">
+                    {phase.description}
+                  </p>
+                  <div className="flex items-center text-xs text-gray-400">
+                    <AiOutlineGlobal className="w-3 h-3 mr-1" />
+                    {phase.location}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Mobile Timeline */}
+        <div className="lg:hidden space-y-8">
+          {journeyPhases.map((phase, index) => (
+            <div key={phase.id} className="relative">
+              {/* Vertical Line */}
+              {index < journeyPhases.length - 1 && (
+                <div
+                  className={`absolute left-6 top-16 w-1 h-20 bg-gradient-to-b ${getCategoryColor(
+                    phase.category
+                  )}`}
+                ></div>
+              )}
+
+              <div className="flex items-start space-x-4">
+                {/* Phase Icon */}
+                <div
+                  className={`flex-shrink-0 w-12 h-12 rounded-full ${getCategoryBg(
+                    phase.category
+                  )} flex items-center justify-center`}
+                >
+                  <div
+                    className={`text-white bg-gradient-to-br ${getCategoryColor(
+                      phase.category
+                    )} rounded-full p-2`}
+                  >
+                    {phase.icon}
                   </div>
                 </div>
 
-                {/* Expandable Content */}
-                {isExpanded && (
-                  <div className="px-4 pb-4 pt-0 border-t border-white/10 mt-2">
-                    <p className="text-gray-300 leading-relaxed text-sm mt-3">
-                      {event.text}
-                    </p>
+                {/* Phase Content */}
+                <div className="card flex-1 p-4">
+                  <h3 className="text-lg font-bold text-white mb-1">
+                    {phase.title}
+                  </h3>
+                  <p className="text-sm font-medium text-secondary mb-2">
+                    {phase.period}
+                  </p>
+                  <p className="text-sm text-gray-300 mb-3">
+                    {phase.description}
+                  </p>
+                  <div className="flex items-center text-xs text-gray-400">
+                    <AiOutlineGlobal className="w-3 h-3 mr-1" />
+                    {phase.location}
                   </div>
-                )}
+                </div>
               </div>
-            );
-          })
-        ) : (
-          <div className="text-center text-gray-300">
-            <p>Timeline data not available</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Detailed View */}
+        {activePhase && (
+          <div className="mt-16">
+            <div className="card p-8">
+              {(() => {
+                const phase = journeyPhases.find((p) => p.id === activePhase);
+                if (!phase) return null;
+
+                return (
+                  <div>
+                    <div className="flex items-center space-x-3 mb-6">
+                      <div
+                        className={`p-3 rounded-full ${getCategoryBg(
+                          phase.category
+                        )}`}
+                      >
+                        <div
+                          className={`text-white bg-gradient-to-br ${getCategoryColor(
+                            phase.category
+                          )} rounded-full p-2`}
+                        >
+                          {phase.icon}
+                        </div>
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-bold text-white">
+                          {phase.title}
+                        </h3>
+                        <p className="text-secondary font-medium">
+                          {phase.period} • {phase.location}
+                        </p>
+                      </div>
+                    </div>
+
+                    <p className="text-gray-300 mb-8">{phase.description}</p>
+
+                    <div className="space-y-6">
+                      {phase.milestones.map((milestone, index) => (
+                        <div
+                          key={index}
+                          className="border-l-4 border-secondary/30 pl-6 relative"
+                        >
+                          <div className="absolute -left-2 top-2 w-4 h-4 bg-secondary rounded-full"></div>
+                          <div className="flex items-center space-x-2 mb-2">
+                            <AiOutlineCalendar className="text-secondary w-4 h-4" />
+                            <span className="text-sm font-bold text-secondary">
+                              {milestone.year}
+                            </span>
+                          </div>
+                          <h4 className="text-lg font-bold text-white mb-1">
+                            {milestone.title}
+                          </h4>
+                          <p className="text-secondary text-sm font-medium mb-2">
+                            {milestone.company}
+                          </p>
+                          <p className="text-gray-300 text-sm mb-3">
+                            {milestone.achievement}
+                          </p>
+                          {milestone.skills && (
+                            <div className="flex flex-wrap gap-2">
+                              {milestone.skills.map((skill, skillIndex) => (
+                                <span
+                                  key={skillIndex}
+                                  className="px-2 py-1 text-xs bg-secondary/20 text-secondary rounded-full border border-secondary/30"
+                                >
+                                  {skill}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })()}
+            </div>
           </div>
         )}
-      </div>
 
-      {/* Compact Call to Action */}
-      <div className="text-center mt-12">
-        <div className="card max-w-xl mx-auto p-6">
-          <h3 className="text-xl font-bold text-white mb-3">What's Next?</h3>
-          <p className="text-gray-300 text-sm mb-4">
-            Always looking for new opportunities to grow and contribute to
-            exciting projects.
-          </p>
-          <button className="btn-primary text-sm px-6 py-2">
-            Get In Touch
-          </button>
+        {/* Future Goals */}
+        <div className="mt-16 text-center">
+          <div className="card max-w-2xl mx-auto p-8">
+            <div className="flex items-center justify-center mb-4">
+              <AiOutlineTrophy className="w-8 h-8 text-amber-500" />
+            </div>
+            <h3 className="text-2xl font-bold text-white mb-4">What's Next?</h3>
+            <p className="text-gray-300 mb-6 leading-relaxed">
+              With a solid foundation in full-stack development and a unique
+              background in project management, I'm excited to contribute to
+              innovative projects and continue growing as a developer.
+            </p>
+            <div className="flex flex-wrap justify-center gap-2 mb-6">
+              <span className="px-3 py-1 text-xs bg-blue-500/20 text-blue-400 rounded-full border border-blue-500/30">
+                TypeScript
+              </span>
+              <span className="px-3 py-1 text-xs bg-green-500/20 text-green-400 rounded-full border border-green-500/30">
+                DevOps
+              </span>
+              <span className="px-3 py-1 text-xs bg-purple-500/20 text-purple-400 rounded-full border border-purple-500/30">
+                Cloud Architecture
+              </span>
+              <span className="px-3 py-1 text-xs bg-orange-500/20 text-orange-400 rounded-full border border-orange-500/30">
+                AI/ML Integration
+              </span>
+            </div>
+            <button className="btn-primary">
+              Let's Build Something Amazing
+            </button>
+          </div>
         </div>
       </div>
     </section>
