@@ -38,12 +38,13 @@ const Hero: React.FC = () => {
             </p>
 
             <p className="text-lg text-gray-400 mb-8 max-w-2xl leading-relaxed">
-              From project management in water engineering to full-stack web
-              development, I bring a unique perspective to software creation.
-              Based in Germany, I specialize in PERN stack development and
-              modern JavaScript technologies. My journey from the Philippines to
-              Europe has shaped my adaptable, solution-focused approach to
-              building applications that make a real impact.
+              Crafting Seamless & Engaging Digital Experiences I turn complex
+              challenges into elegant, user-centered web solutions. With a blend
+              of technical precision and creative intuition, I build
+              applications that are not just functional but also captivating.
+              Every project I take on is a balance of performance, aesthetics,
+              and an intuitive user experience—designed to leave a lasting
+              impression.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">

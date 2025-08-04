@@ -18,8 +18,8 @@ const About: React.FC = () => {
               <p className="text-lg text-gray-300 leading-relaxed">
                 From engineering to web development, my journey has been one of
                 transformation and adaptability. Originally a project manager in
-                the water industry, I made the bold leap into tech, blending my
-                analytical mindset with modern web technologies.
+                the water & wastewater industry, I made the bold leap into tech,
+                blending my analytical mindset with modern web technologies.
               </p>
             </div>
           </div>
@@ -33,11 +33,12 @@ const About: React.FC = () => {
             <div>
               <p className="text-lg text-gray-300 leading-relaxed">
                 Relocating from the Philippines to Germany in 2022, I immersed
-                myself in both German language (B2 level) and the MERN stack,
-                honing my ability to build impactful web solutions. My
-                background equips me with a structured problem-solving approach,
-                an eye for detail, and the ability to translate complex ideas
-                into functional digital experiences.
+                myself in both the German language (B2 level) and the PERN/MERN
+                stack, Next.js, PostgreSQL, and Prisma, honing my ability to
+                build impactful web solutions. My background equips me with a
+                structured problem-solving approach, an eye for detail, and the
+                ability to translate complex ideas into functional digital
+                experiences.
               </p>
             </div>
           </div>
