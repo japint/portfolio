@@ -8,6 +8,21 @@ import { projects, Project } from "../../constants/constants";
 
 const Projects: React.FC = () => {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+  const [visibleProjects, setVisibleProjects] = useState(3);
+  const [showAll, setShowAll] = useState(false);
+
+  const handleLoadMore = () => {
+    if (showAll) {
+      setVisibleProjects(3);
+      setShowAll(false);
+    } else {
+      setVisibleProjects(projects.length);
+      setShowAll(true);
+    }
+  };
+
+  const displayedProjects =
+    projects && projects.length > 0 ? projects.slice(0, visibleProjects) : [];
 
   return (
     <section id="projects" className="section-container">
@@ -19,8 +34,8 @@ const Projects: React.FC = () => {
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {projects && projects.length > 0 ? (
-          projects.map((project: Project) => (
+        {displayedProjects.length > 0 ? (
+          displayedProjects.map((project: Project) => (
             <div
               key={project.id}
               className="card group hover:scale-105 transition-all duration-300 overflow-hidden"
@@ -114,14 +129,23 @@ const Projects: React.FC = () => {
             </p>
           </div>
         )}
-      </div>{" "}
-      {/* View All Projects Button */}
-      <div className="text-center mt-12">
-        <button className="btn-outline group">
-          <span>View All Projects</span>
-          <AiOutlineArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-200" />
-        </button>
       </div>
+
+      {/* Load More / Show Less Button */}
+      {projects && projects.length > 3 && (
+        <div className="text-center mt-12">
+          <button onClick={handleLoadMore} className="btn-outline group">
+            <span>
+              {showAll ? "Show Less" : `View All Projects (${projects.length})`}
+            </span>
+            <AiOutlineArrowRight
+              className={`w-5 h-5 ml-2 group-hover:translate-x-1 transition-all duration-200 ${
+                showAll ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+        </div>
+      )}
     </section>
   );
 };
