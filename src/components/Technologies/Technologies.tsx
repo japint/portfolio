@@ -3,6 +3,7 @@ import {
   DiReact,
   DiNodejsSmall,
   DiPostgresql,
+  DiMongodb,
   DiJavascript1,
   DiCss3,
   DiHtml5,
@@ -51,11 +52,12 @@ const Technologies: React.FC = () => {
     {
       title: "Back-End Foundation",
       description:
-        "🛠 Node.js, Express, MongoDB, PostgreSQL, Vite – Building scalable and efficient server-side solutions.",
+        "🛠 Node.js, Express, MongoDB, PostgreSQL, Prisma – Building scalable and efficient server-side solutions.",
       icon: <DiNodejsSmall size="3rem" className="text-green-400" />,
       technologies: [
         { name: "Node.js", icon: <DiNodejsSmall className="w-6 h-6" /> },
         { name: "Next.js API", icon: <SiNextdotjs className="w-6 h-6" /> },
+        { name: "MongoDB", icon: <DiMongodb className="w-6 h-6" /> },
         { name: "PostgreSQL", icon: <DiPostgresql className="w-6 h-6" /> },
         { name: "Prisma", icon: <SiPrismic className="w-6 h-6" /> },
       ],
