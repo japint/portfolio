@@ -36,14 +36,14 @@ const journeyPhases: TimelinePhase[] = [
   {
     id: "foundation",
     title: "Foundation Era",
-    period: "2005-2017",
+    period: "2002-2017",
     description: "Building technical expertise and engineering mindset",
     location: "Philippines & Saudi Arabia",
     category: "education",
     icon: <AiOutlineBook className="w-6 h-6" />,
     milestones: [
       {
-        year: "2005-2009",
+        year: "2002-2006",
         title: "Bachelor of Science in Information Technology",
         company: "AMA Computer College, Philippines",
         achievement: "BSIT degree with software development foundation",
