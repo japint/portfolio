@@ -160,6 +160,14 @@ const journeyPhases: TimelinePhase[] = [
           "PERN Stack",
         ],
       },
+      {
+        year: "SEP 2025 - Present",
+        title: "Full-Stack Developer",
+        company: "Codebility",
+        achievement:
+          "Contributed to a SaaS product team focused on developing scalable, high-performance web applications with Next.js, React, TypeScript, and Firebase integration.",
+        skills: ["Next.js", "TypeScript", "React", "Node.js", "Firebase"],
+      },
     ],
   },
 ];
