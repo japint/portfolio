@@ -62,8 +62,9 @@ const Footer: React.FC = () => {
               </span>
             </div>
             <p className="text-gray-300 leading-relaxed max-w-sm">
-              Full-Stack Web Developer passionate about creating exceptional
-              digital experiences through innovative PERN stack development.
+              Full-Stack Developer crafting innovative web solutions with modern
+              technologies. Passionate about creating seamless user experiences
+              and scalable applications.
             </p>
           </div>
 
